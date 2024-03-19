@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="f7128099-0048-4672-899b-e4ce8a14c5a9" basePath="/test" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="jenkinspipelineFlow" doc:id="0c2b6477-9d87-493e-a30f-56290d9b8b91" >
+		<http:listener doc:name="Listener" doc:id="fc7fcc71-8d44-4171-ba67-f60de0cbe2cf" config-ref="HTTP_Listener_config" path="/testing" allowedMethods="GET"/>
+		<ee:transform doc:name="Transform Message" doc:id="4621b774-b335-4a02-a648-c2f2117da09d" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"Its": " good",
+	"we": "are good"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="52705425-713c-470f-b61b-43f6024833a2" message="Flow Completed at the end, for jenkins pipeline"/>
+	</flow>
+</mule>
