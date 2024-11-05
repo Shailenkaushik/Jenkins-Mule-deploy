@@ -16,8 +16,8 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 output application/json
 ---
 {
-	"Its": " good",
-	"we": "are good"
+	"Its": " good, no its vergy slkjd",
+	"we are": "sd good"
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
